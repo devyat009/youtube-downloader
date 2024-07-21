@@ -1,5 +1,5 @@
 # youtube-downloader
-An simple Youtube video downloader in python.
+An simple Youtube video downloader in python using the [yt-dlp](https://github.com/yt-dlp/yt-dlp) under the hood.
 
 - Supported formats are: mp4, m4a, webm
 - Resoulion supported: up to 2160p
