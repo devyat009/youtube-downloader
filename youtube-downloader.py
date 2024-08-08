@@ -112,6 +112,7 @@ class YtDownloaderApp:
                 ydl_opts = {
                     'format': 'best',
                     'progress_hooks': [self.progress_hook],
+                    'listformats': True
                 }
                 
                 with YoutubeDL(ydl_opts) as ydl:
