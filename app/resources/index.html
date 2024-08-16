@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>none</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="column">
+                <label for="input1" class="url">URL</label> <!-- For -->
+                <div class="input-group-url">
+                    <input type="text" id="url1" placeholder="Enter the URL" class="input-url">
+                    <button type="button" id="sendFind" class="url-search-button">Find</button>
+                    <p id="findResponse"></p>
+                </div>
+                <label for="input2" class="file-path">Path to save</label>
+                <div class="input-group-path">
+                    <input type="text" id="path1" placeholder="Select the PATH" class="input-path">
+                    <button type="button" id="sendPath" class="path-search-button">Select</button>
+                    <p id="pathResponse"></p>
+                </div>
+
+                <span class="progress-text" id="progress-label"></span>
+                <div class="download-container">
+                    <button type="button" id="downloadBtn" class="download-btn">Download</button>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="column2">
+                <label class="select-file-type-text">File Type</label>
+                <div class="dropdown-file-type">
+                    <button class="dropdown-btn">Select</button>
+                    <div class="dropdown-content-file">
+                        <!-- Options will be added dynamically here -->
+                    </div>
+                </div>
+                <label class="select-resolution-text">Resolution</label>
+                <div class="dropdown-file-type">
+                    <button class="dropdown-btn-resolution">Select</button>
+                    <div class="dropdown-resolution-content">
+                        <!-- Options will be added dynamically here -->
+                    </div>
+                </div>
+            </div>
+            <div class="row-3">
+                <label class="thumbnail-label">Thumbnail</label>
+                <div class="thumbnail-box"></div>
+            </div>
+        </div>
+        <script src="scripts.js"></script>
+    </body>
+</html>

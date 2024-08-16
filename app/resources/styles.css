@@ -1,0 +1,435 @@
+/* Horrible CSS
+    I will let most of the itens commented because my memory is bad :)
+    Some unused options will be here.
+    att Devyat009
+*/
+
+body {
+    background-color: rgb(15, 15, 15);
+}
+h2 {
+    color: purple;
+}
+.container {
+    align-items: flex-start; /* Changed to flex-start to align items to the top, change to normal if wrong*/
+    background-color: rgba(36, 36, 36, 0.87);
+    backdrop-filter: blur(5px); /* Ongoing Idea */
+    -webkit-backdrop-filter: blur(15px); /* Ongoing Idea */
+    border: 1px solid #111111;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row; /* Entire container row direction*/
+    justify-content: normal;
+    position: relative; /* Permits the transform (Not used) */
+    transform: translateX(0px); /* Move the container x pixels to the right (Not used)*/
+    margin-top: 5px;
+    padding: 5px;
+
+    height: 94vh; /* 94% of the view height due scroll bars showing above that, effect I don't wanna */
+    width: auto; /* Automatic width adjust */
+}
+
+@media (min-width: 1200px) {
+    body {
+        background-color: cover;
+    }
+    .container {
+        width: auto !important; /* Forcing increase to auto adjust */
+        /*height: 96vh !important; /* Forcing increase to 96% due size doesn't matching when in a lower width less than 1200px */
+        display: flex;
+    }
+}
+
+/* This is actually are ROWS (Rename later)*/
+.column {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+    margin-left: 0px;
+}
+.column2 {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+    /*margin-left: 20px; /* Changed to 0 to align to the left, previous 20px*/
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+}
+.row-3 {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+    /*margin-left: 20px; /* Changed to 0 to align to the left, previous 20px*/
+    justify-content: flex-start; /* Align items to the left */
+}
+
+/* ROW 1 - THE URL, PATH, DOWNLOAD AND PROGRESS BAR */
+/* THE URL GROUP */
+.input-group-url {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+.url {
+    align-self: start;
+    color: white;
+    margin-left: 30px;
+    margin-top: 20px;
+    user-select: none; /* Disable text selection */
+    font-family: 'Lucida Sans', sans-serif;
+}
+.input-url {
+    border: none;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    color: black;
+    flex-grow: 1; /* Make the input take as much space as possible */
+    margin-left: 20px;
+    padding: 5px;
+    height: 28px;
+    width: 300px;
+    font-family: 'Lucida Sans', sans-serif;
+}
+.input-url:focus {
+    outline: none; /* Disable outline focus */
+}
+.url-search-button {
+    background-color: rgba(217, 217, 217, 1);
+    transition: background-color 0.3s, color 0.3s; /* Hover transition */
+    border: none; /* No border outline */
+    border-radius: 0 10px 10px 0; /* 10px for top-right and bottom-right corners */
+    cursor: pointer; /* Hint of being clickable */
+    user-select: none; /* Disable text selection */
+    text-align: center;
+    font-family: 'Lucida Sans', sans-serif;
+    padding: 5px;
+    height: 38px; /*10px bigger than url-input due padding size(i think) */
+    width: 60px;
+}
+.url-search-button:hover {
+    background-color: blue;
+}
+.url-search-button:focus {
+    outline: none; /* Disable outline focus */
+}
+
+/* THE PATH GROUP */
+.file-path {
+    align-self: start;
+    color: white;
+    margin-top: 10px;
+    margin-left: 30px;
+    user-select: none; /* Disable text selection */
+    font-family: 'Lucida Sans', sans-serif;
+}
+.input-group-path {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+}
+.input-path {
+    border: none; /* No border outline */
+    border-radius: 10px 0 0 10px; /* 10px for the top-left and bottom-left corners */
+    color: black;
+    flex-grow: 1; /* Make the input take as much space as possible */
+    margin-left: 20px;
+    padding: 5px;
+    height: 28px;
+    width: 300px;
+    font-family: 'Lucida Sans', sans-serif;
+}
+.input-path:focus {
+    outline: none; /* Disable outline focus */
+}
+.path-search-button {
+    border: none; /* No border outline */
+    border-radius: 0 10px 10px 0; /* 10px for the top-right and bottom-right corners */
+    background-color: rgba(217, 217, 217, 1);
+    transition: background-color 0.3s, color 0.3s; /* Hover transition */
+    cursor: pointer; /* Hint of being clickable */
+    user-select: none; /* Disable text selection */
+    text-align: center;
+    font-family: 'Lucida Sans', sans-serif;
+    padding: 5px;
+    height: 38px; /*10px bigger than url-input due padding size(i think) */
+    width: 60px;
+}
+.path-search-button:hover {
+    background-color: blue;
+}
+.path-search-button:focus {
+    outline: none; /* Disable outline focus */
+}
+/* THE DOWNLOAD GROUP´*/
+.download-btn {
+    height: 38px;
+    width: 80px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;
+    border: none;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+.download-btn:hover {
+    background-color: blue;
+}
+.download-btn:focus {
+    outline: none;
+}
+
+.download-container {
+    display: flex;
+    align-items: center; /* Align vertically to the center*/
+    /*margin-top: 10px; /* Space between the elements inside (download and progress bar) */
+}
+
+/* PROGRESS CONTAINER */
+.progress-container {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.progress-bar {
+    height: 38px;
+    width: 0%;
+    background-color: #4caf50;
+    justify-content: flex-end; /* Align text to the right */
+    align-items: right; /* Center text vertically */
+    user-select: none;
+    line-height: 0px;
+    transition: width 0.4s ease;
+}
+.progress-text {
+    /*padding-right: -50px; /* Add some padding to the right */
+    color: rgb(255, 255, 255);
+    margin-left: 110px;
+    margin-top: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    user-select: none;
+}
+/* Full Screen Adjust ROW - 1 (WIP) */
+@media (min-width: 1200px) {
+    .input-group-url {
+        /*width: 70%*/
+    }
+    .input-group-path {
+        /*width: 70%;*/
+    }
+    .progress-text {
+        margin-left: 110px;
+    }
+}
+
+/* ROW 2 - THE FILE TYPE, VIDEO QUALITY GROUP */
+
+/* FILE TYPE DROPDOWN SECTION */
+.select-file-type-text {
+    color: white;
+    margin-top: 20px;
+    user-select: none; /* Disable text selection */
+    font-family: 'Lucida Sans', sans-serif;
+}
+.file-type-select-group {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.dropdown-file-type {
+    position: relative;
+    display: inline-block;
+}
+
+button.dropdown-btn {
+    background-color: #f9f9f9;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 5px;
+    width: 120px;
+    height: 35px;
+    text-align: center;
+    user-select: none; /* Disable text selection */
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Lucida Sans', sans-serif;
+}
+.dropdown-btn:hover {
+    background-color: blue;
+}
+.dropdown-btn:focus {
+    outline: none;
+}
+
+.dropdown-content-file {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    z-index: 1;
+    width: 120px;
+    max-height: 200px;
+    overflow-y: auto;
+    user-select: none; /* Disable text selection */
+    cursor: pointer;
+    font-family: 'Lucida Sans', sans-serif;
+    text-align: center;
+}
+.dropdown-content-file:focus {
+    outline: none;
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    user-select: none; /* Disable text selection */
+}
+.dropdown-item:focus {
+    outline: none;
+}
+
+.dropdown-item:hover {
+    background-color: #a5ecae;
+}
+
+/* RESOLUTION DROPDOWN SECTION */
+.select-resolution-text {
+    color: white;
+    margin-top: 10px;
+    user-select: none;
+    font-family: 'Lucida Sans', sans-serif;
+}
+button.dropdown-btn-resolution {
+    background-color: #f9f9f9;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 5px;
+    width: 120px; /* Ajuste conforme necessário */
+    height: 35px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Lucida Sans', sans-serif;
+    user-select: none; /* Disable text selection */
+}
+.dropdown-btn-resolution:hover {
+    background-color: blue;
+}
+.dropdown-btn-resolution:focus {
+    outline:none;
+}
+.dropdown-resolution-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    z-index: 1;
+    width: 120px;
+    max-height: 200px;
+    overflow-y: auto;
+    user-select: none; /* Disable text selection */
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Lucida Sans', sans-serif;
+}
+.dropdown-resolution-content:focus {
+    outline: none;
+}
+
+.dropdown-resolution-item {
+    padding: 10px;
+    cursor: pointer;
+    user-select: none; /* Disable text selection */
+}
+
+@media (min-width: 1200px) {
+    .dropdown-file-type {
+        text-align: center;
+    }
+    .select-file-type-text {
+        text-align: center;
+    }
+    .column2 {
+        text-align: center;
+        width: 30%;
+    }
+    .row-3 {
+        text-align: center;
+    }
+}
+
+/* ROW 3 - THE TUMBNAIL */
+
+.thumbnail-label {
+    color: white;
+    margin-top: 20px;
+    align-self: start;
+    margin-left: 30px;
+    user-select: none;
+    font-family: 'Lucida Sans', sans-serif;
+}
+
+.thumbnail-box {
+    /*background-color: aqua;*/
+    background-image: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    /*border:5px solid rgba(36, 36, 36, 0.87);*/
+    padding: 0px;
+    margin-top: 5px;
+    width: 170px;
+    height: 103px;
+}
+
+/* THE ALERT */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336; /* Cor de fundo vermelho */
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+}
+
+.custom-alert span {
+    flex-grow: 1;
+}
+
+.custom-alert button {
+    background-color: white;
+    color: #f44336;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.custom-alert button:hover {
+    background-color: #fdd;
+}

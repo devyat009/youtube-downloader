@@ -1,10 +1,11 @@
 # youtube-downloader
-An simple Youtube video downloader in python using the [yt-dlp](https://github.com/yt-dlp/yt-dlp) under the hood.
+A simple YouTube video downloader in Python, HTML, CSS and JavaScript using the [yt-dlp](https://github.com/yt-dlp/yt-dlp) under the hood.
 
-Note 2024/8/8 -  Coming soon new backend and interface based on html and css
 
-- Supported formats are: mp4, m4a, webm
-- Resoulion supported: up to 2160p
+
+- Supported formats: mp4
+- Resolution supported: up to 2160p 60fps
+- Auto audio quality selection.
 
 The interface:
 
@@ -14,17 +15,25 @@ When downloading:
 
 ![youtube-downloader-screenshot2](https://github.com/user-attachments/assets/0e90b7e6-1142-42da-a33f-e0a8019702d0)
 
-Known issue:
-
-1 - After canceling any download, the program maintein the file unfinished.
 
 ### How to build by yourself:
-
-Step one - Activate the venv.
+Step 0 - Create a Virtual Environment (Optional)
 ```bash
-VirutalAmbient\Scripts\activate.bat
+python -m venv VirtualAmbient
 ```
-Step two - Use the pyinstaller
+Enable it:
 ```bash
-pyinstaller --noconsole --onefile youtube-downloader.py
+.\VirtualAmbient\Scripts\activate.bat
+```
+Step 1 - Install the dependencies.
+```bash
+pip install -r requirements.txt
+```
+Step 2 - Enter in the app folder.
+```bash
+cd app
+```
+Step 3 - Use the pyinstaller to build.
+```bash
+pyinstaller youtube_downloader.spec
 ```
