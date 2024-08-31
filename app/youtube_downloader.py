@@ -20,9 +20,14 @@ class App(QMainWindow):
             # when compiled with the pyinstaller will be in the folder _MEIPASS
             base_path = Path(sys._MEIPASS)
         else:
-            base_path = Path.cwd()
-        file_path = base_path / "resources" / "index.html"
+            #     base_path = Path.cwd()
+            base_path = Path(__file__).parent
+        # file_path = base_path / "app"/ "resources" / "index.html"
+            
+        resources_path = base_path / "resources"
+        file_path = resources_path / "index.html"
         
+        #file_path = base_path / "app" / "resources" / "index.html"
         # Loads the HTML for the frontend.
         if file_path.exists():
             url_path = file_path.as_uri()

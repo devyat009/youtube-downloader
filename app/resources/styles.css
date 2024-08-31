@@ -7,9 +7,6 @@
 body {
     background-color: rgb(15, 15, 15);
 }
-h2 {
-    color: purple;
-}
 .container {
     align-items: flex-start; /* Changed to flex-start to align items to the top, change to normal if wrong*/
     background-color: rgba(36, 36, 36, 0.87);
@@ -73,21 +70,39 @@ h2 {
     align-items: center;
     margin-top: 5px;
 }
-.url {
+
+.find-icon {
+    display: flex;
+    width: 2.5rem; /*40px*/
+    height: 2.375rem; /*38px*/
+    margin-left: 1.25rem; /*20px*/
+    align-items: center;
+    justify-content: center;
+    fill: #3B82F6;
+    background-color: #FFFFFF; /* bg-white */
+    border-right: 1px solid #E5E7EB; /* small gray */
+    border-top-left-radius: 0.5rem; /* rounded-tl-lg */
+    border-bottom-left-radius: 0.5rem; /* rounded-bl-lg */
+    position: relative;
+    background-size: 1.56rem;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.url { /* URL LABEL*/
     align-self: start;
-    color: white;
+    color: #ffF;
     margin-left: 30px;
-    margin-top: 20px;
+    margin-top: 1.25rem;
     user-select: none; /* Disable text selection */
     font-family: 'Lucida Sans', sans-serif;
 }
 .input-url {
     border: none;
     border-right: none;
-    border-radius: 10px 0 0 10px;
-    color: black;
+    color: #111111;
     flex-grow: 1; /* Make the input take as much space as possible */
-    margin-left: 20px;
     padding: 5px;
     height: 28px;
     width: 300px;
@@ -97,7 +112,7 @@ h2 {
     outline: none; /* Disable outline focus */
 }
 .url-search-button {
-    background-color: rgba(217, 217, 217, 1);
+    background-color: #3B82F6;
     transition: background-color 0.3s, color 0.3s; /* Hover transition */
     border: none; /* No border outline */
     border-radius: 0 10px 10px 0; /* 10px for top-right and bottom-right corners */
@@ -105,16 +120,20 @@ h2 {
     user-select: none; /* Disable text selection */
     text-align: center;
     font-family: 'Lucida Sans', sans-serif;
+    font-weight: 600; /* font-semibold */
+    color: #FFFFFF;
     padding: 5px;
-    height: 38px; /*10px bigger than url-input due padding size(i think) */
-    width: 60px;
+    height: 2.375rem; /*10px bigger than url-input due padding size(i think) */
+    width: 3.75rem;
 }
 .url-search-button:hover {
-    background-color: blue;
+    background-color: #1D4ED8;
+    transform: scale(1.1);
 }
 .url-search-button:focus {
     outline: none; /* Disable outline focus */
 }
+
 
 /* THE PATH GROUP */
 .file-path {
@@ -132,10 +151,9 @@ h2 {
 }
 .input-path {
     border: none; /* No border outline */
-    border-radius: 10px 0 0 10px; /* 10px for the top-left and bottom-left corners */
+    border-radius: 0 0 0 0; /* 10px for the top-left and bottom-left corners */
     color: black;
     flex-grow: 1; /* Make the input take as much space as possible */
-    margin-left: 20px;
     padding: 5px;
     height: 28px;
     width: 300px;
@@ -145,49 +163,154 @@ h2 {
     outline: none; /* Disable outline focus */
 }
 .path-search-button {
+    background-color: #3B82F6;
     border: none; /* No border outline */
     border-radius: 0 10px 10px 0; /* 10px for the top-right and bottom-right corners */
-    background-color: rgba(217, 217, 217, 1);
     transition: background-color 0.3s, color 0.3s; /* Hover transition */
     cursor: pointer; /* Hint of being clickable */
     user-select: none; /* Disable text selection */
     text-align: center;
     font-family: 'Lucida Sans', sans-serif;
+    font-weight: 600; /* font-semibold */
+    color: #FFFFFF;
     padding: 5px;
-    height: 38px; /*10px bigger than url-input due padding size(i think) */
-    width: 60px;
+    height: 2.375rem; /*10px bigger than url-input due padding size(i think) */
+    width: 3.75rem;
 }
 .path-search-button:hover {
-    background-color: blue;
+    background-color: #1D4ED8;
+    transform: scale(1.1);
 }
 .path-search-button:focus {
     outline: none; /* Disable outline focus */
 }
+
+.path-icon {
+    display: flex;
+    width: 2.5rem; /*40px*/
+    height: 2.375rem; /*38px*/
+    margin-left: 1.25rem; /*20px*/
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    stroke: #3B82F6;
+    border-right: 1px solid #E5E7EB; /* small gray */
+    border-top-left-radius: 0.5rem; /* rounded-tl-lg */
+    border-bottom-left-radius: 0.5rem; /* rounded-bl-lg */
+    background-repeat: no-repeat;
+    background-position: center;
+}
 /* THE DOWNLOAD GROUP´*/
 .download-btn {
-    height: 38px;
-    width: 80px;
+    height: 2.375rem;
+    width: auto;
     text-align: center;
+    font-weight: 600; /* font-semibold */
     user-select: none;
     cursor: pointer;
-    background-color: white;
+    color: #4caf50;
+    background-color: #FFFFFF;
     transition: background-color 0.3s, color 0.3s;
-    border: none;
+    border-style: none;
     border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
     margin-top: 5px;
+    align-items: center;
+    gap: 0.5rem;
+    display: flex;
 }
 .download-btn:hover {
-    background-color: blue;
+    background-color: #4caf50;
+    color: #FFFFFF;
+    transform: scale(1.1);
 }
 .download-btn:focus {
     outline: none;
+}
+.download-icon {
+    /* background: #ffff; */
+    /* border-radius: 0.5rem 0 0 0.5rem; */
+    /* background-repeat: no-repeat;
+    background-image: url('icons/download.svg');
+    background-position: center; */
+    fill: #4caf50;
+    transition: fill 0.3s;
+    width: 1.5rem;
+    height: 1.0rem;
+    /* margin-left: 20px;
+    margin-top: 5px; */
+}
+/* Animation for the Download Icon */
+.download-btn:hover .download-icon {
+    fill: #FFFFFF;
+    animation: slide-in-top 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+/* Animation Frames for the Download Button*/
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+/* Cancel Button*/
+.cancel-btn {
+    background-color: #FFFFFF;
+    height: 2.375rem;
+    width: auto;
+    text-align: center;
+    font-weight: 600; /* font-semibold */
+    user-select: none;
+    cursor: pointer;
+    color: #f44336;
+    transition: background-color 0.3s, color 0.3s;
+    border: none;
+    border-radius: 10px;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    margin-top: 5px;
+    align-items: center;
+    gap: 0.5rem;
+    display: flex;
+}
+.cancel-btn:hover {
+    background-color: #f44336;
+    color: #FFFFFF;
+    transform: scale(1.1);
+}
+.cancel-btn:focus {
+    outline: none;
+}
+/*Cancel Icon*/
+.cancel-icon {
+    fill: #f44336; /*Color Change*/
+}
+/* Animation for the Cancel Icon */
+.cancel-btn:hover .cancel-icon {
+    fill: #FFFFFF;
+    animation: slide-in-left 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+/* Animation Frames for the Cancel Button*/
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
 }
 
 .download-container {
     display: flex;
     align-items: center; /* Align vertically to the center*/
+    gap: 1rem;
     /*margin-top: 10px; /* Space between the elements inside (download and progress bar) */
 }
 
@@ -199,12 +322,13 @@ h2 {
     overflow: hidden;
     margin-bottom: 0px;
     margin-top: 5px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 .progress-bar {
-    height: 38px;
+    height: 2.375rem;
     width: 0%;
-    background-color: #4caf50;
+    background: linear-gradient(-45deg, #276f2a 0%, #4caf50 100% );
     justify-content: flex-end; /* Align text to the right */
     align-items: right; /* Center text vertically */
     user-select: none;
@@ -214,7 +338,7 @@ h2 {
 .progress-text {
     /*padding-right: -50px; /* Add some padding to the right */
     color: rgb(255, 255, 255);
-    margin-left: 110px;
+    margin-left: 120px;
     margin-top: 10px;
     font-size: 12px;
     white-space: nowrap;
@@ -229,7 +353,7 @@ h2 {
         /*width: 70%;*/
     }
     .progress-text {
-        margin-left: 110px;
+        margin-left: 11vw;
     }
 }
 
@@ -238,7 +362,7 @@ h2 {
 /* FILE TYPE DROPDOWN SECTION */
 .select-file-type-text {
     color: white;
-    margin-top: 20px;
+    margin-top: 1.25rem;
     user-select: none; /* Disable text selection */
     font-family: 'Lucida Sans', sans-serif;
 }
@@ -253,57 +377,91 @@ h2 {
     display: inline-block;
 }
 
-button.dropdown-btn {
+.select-filetype {
     background-color: #f9f9f9;
+    color: #3B82F6;
     border: 0px solid #ccc;
     border-radius: 10px;
     cursor: pointer;
-    padding: 5px;
+    /* padding: 5px; */
     margin-top: 5px;
-    width: 120px;
+    width: 120px; /* Ajuste conforme necessário */
     height: 35px;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    user-select: none; /* Disable text selection */
     transition: background-color 0.3s, color 0.3s;
     font-family: 'Lucida Sans', sans-serif;
+    font-weight: 600; /* font-semibold */
+    user-select: none; /* Disable text selection */
+    line-height: 35px; /* For some reason it makes centralized */
 }
-.dropdown-btn:hover {
-    background-color: blue;
+.select-filetype:hover {
+    background-color: #1D4ED8;
+    color: #FFFFFF;
 }
-.dropdown-btn:focus {
+.select-filetype:focus {
     outline: none;
 }
+.select-filetype .text {
+    flex-grow: 1;
+    text-align: center; 
+}
 
-.dropdown-content-file {
+/* The Options Container*/
+.options-filetype {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #ebebeb;
     border-radius: 5px;
     z-index: 1;
     width: 120px;
-    max-height: 200px;
+    max-height: 240px;
     overflow-y: auto;
     user-select: none; /* Disable text selection */
     cursor: pointer;
-    font-family: 'Lucida Sans', sans-serif;
     text-align: center;
+    font-size: 12px;
+    font-family: 'Lucida Sans', sans-serif;
+    opacity: 0;
+    top: -100px; /* starts above to later go to 0 positon on hover */
 }
-.dropdown-content-file:focus {
+.options-filetype:focus {
     outline: none;
 }
 
-.dropdown-item {
-    padding: 10px;
-    cursor: pointer;
-    user-select: none; /* Disable text selection */
-}
-.dropdown-item:focus {
-    outline: none;
+/* The single option inside the .options-resolution*/
+.option-filetype {
+    border-radius: 5px;
+    padding: 5px;
+    transition: 300ms;
+    color:#3B82F6;
+    background-color: #FFFFFF;
+    width: 106px;
+    height: 15px;
+    margin: 2px;
+    /* font-size: 15px; */
+    text-align: center;
+    white-space: nowrap;
+    line-height: normal; /* It will fix the father 'options-resolution' putting 35px of height*/
 }
 
-.dropdown-item:hover {
-    background-color: #a5ecae;
+.option-filetype:hover {
+    background-color: #d1e3ff;
+    box-shadow: 0 2px 2px #3b83f666;
 }
+
+
+.select-filetype:hover > .options-filetype {
+    opacity: 1;
+    top: 0;
+}
+
+.select-filetype:hover > .dropdown-arrow-icon {
+    transform: rotate(0deg);
+    fill:#FFFFFF;
+}
+
 
 /* RESOLUTION DROPDOWN SECTION */
 .select-resolution-text {
@@ -312,49 +470,103 @@ button.dropdown-btn {
     user-select: none;
     font-family: 'Lucida Sans', sans-serif;
 }
-button.dropdown-btn-resolution {
+.select-resolution {
     background-color: #f9f9f9;
+    color: #3B82F6;
     border: 0px solid #ccc;
     border-radius: 10px;
     cursor: pointer;
-    padding: 5px;
+    /* padding: 5px; */
     margin-top: 5px;
     width: 120px; /* Ajuste conforme necessário */
     height: 35px;
+    display: flex;
+    justify-content: center;
     text-align: center;
     transition: background-color 0.3s, color 0.3s;
     font-family: 'Lucida Sans', sans-serif;
+    font-weight: 600; /* font-semibold */
     user-select: none; /* Disable text selection */
+    line-height: 35px; /* For some reason it makes centralized */
 }
-.dropdown-btn-resolution:hover {
-    background-color: blue;
+.select-resolution:hover {
+    background-color: #1D4ED8;
+    color: #FFFFFF;
+    
 }
-.dropdown-btn-resolution:focus {
+.select-resolution:focus {
     outline:none;
 }
-.dropdown-resolution-content {
+/* The Options Container*/
+.options-resolution {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #ebebeb;
     border-radius: 5px;
     z-index: 1;
     width: 120px;
-    max-height: 200px;
+    max-height: 240px;
     overflow-y: auto;
     user-select: none; /* Disable text selection */
     cursor: pointer;
     text-align: center;
     font-size: 12px;
     font-family: 'Lucida Sans', sans-serif;
+    opacity: 0;
+    top: -100px; /* starts above to later go to 0 positon on hover */
 }
-.dropdown-resolution-content:focus {
+.options-resolution:focus {
     outline: none;
 }
 
-.dropdown-resolution-item {
-    padding: 10px;
-    cursor: pointer;
-    user-select: none; /* Disable text selection */
+.select-resolution .text {
+    flex-grow: 1;
+    text-align: center; 
+}
+
+/* The single option inside the .options-resolution*/
+.option-resolution {
+    border-radius: 5px;
+    padding: 5px;
+    transition: 300ms;
+    color:#3B82F6;
+    background-color: #FFFFFF;
+    width: 106px;
+    height: 15px;
+    margin: 2px;
+    /* font-size: 15px; */
+    text-align: center;
+    white-space: nowrap;
+    line-height: normal; /* It will fix the father 'options-resolution' putting 35px of height*/
+}
+
+.option-resolution:hover {
+    background-color: #d1e3ff;
+    box-shadow: 0 2px 2px #3b83f666;
+}
+
+
+.select-resolution:hover > .options-resolution {
+    opacity: 1;
+    top: 0;
+}
+
+.select-resolution:hover > .dropdown-arrow-icon {
+    transform: rotate(0deg);
+    fill:#FFFFFF;
+}
+
+.dropdown-arrow-icon {
+    fill: #3B82F6;
+    position: relative;
+    right: 5px;
+    height: 13px;
+    transform: rotate(-90deg);
+    width: 25px;
+    z-index: 100000;
+    transition: 300ms;
+    margin-left: auto; /* Send it to the far right corner*/
+    margin-top: 10px; /* Only way found to centralize it */
 }
 
 @media (min-width: 1200px) {
@@ -377,34 +589,121 @@ button.dropdown-btn-resolution {
 
 .thumbnail-label {
     color: white;
-    margin-top: 20px;
+    margin-top: 1.25rem;
     align-self: start;
     margin-left: 30px;
     user-select: none;
     font-family: 'Lucida Sans', sans-serif;
 }
 
+.image-icon {
+    fill:#FFFFFF;
+    width: 40px;
+    height: 40px;
+    
+}
+
 .thumbnail-box {
     /*background-color: aqua;*/
-    background-image: none;
+    background: linear-gradient(-45deg, #8fbaff 0%, #1D4ED8 100% );
+    /*background-image: none; */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
-    /*border:5px solid rgba(36, 36, 36, 0.87);*/
+    border: 2px solid #FFFFFF;
     padding: 0px;
     margin-top: 5px;
     width: 170px;
-    height: 103px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+.thumbnail-box:hover {
+    transform: scale(1.1);
+    border: 2px solid #3B82F6;
+}
+
+.thumbnail-downloadButton {
+    transform: translate(0%, 200%);
+    width: 60%;
+    height: 32px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFFFFF;
+    color: #4caf50;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    /* position: absolute;
+    left: 50%; */
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+    cursor:pointer;
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+}
+.thumbnail-downloadButton:hover {
+    background-color: #4caf50;
+    color:#FFFFFF
+}
+.thumbnail-downloadButton:focus {
+    outline: none;
+}
+.thumbnail-downloadButton .download-icon {
+    height: 14px;
+}
+.thumbnail-downloadButton:hover .download-icon {
+    fill:#FFFFFF;   
+    animation: slide-in-top 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.thumbnail-box:hover .thumbnail-downloadButton {
+    transform: translate(0%, 125%);
+    opacity: 1;
+}
+.thumbnail_downloadText {
+    margin-left: 5px;
+    user-select: none;
+}
+/* Thumbnail Download Custom Span*/
+.thumbnailPopUpContainer {
+    background: linear-gradient(-45deg, #8fbaff 0%, #2f4584 100% );
+    color: white;
+    position: fixed;
+    /* width: 250px;
+    height: 100px; */
+    top: 45vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    display: grid;
+    padding: 16px;
+    justify-content: space-between;
+    border-radius: 15px;
+    z-index: 1000;
+    border: 2px solid #ffff;
+}
+
+.thumbnailPopUpContainer .openFolderButton {
+    margin-top: 25px;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    transform: translate(-25%, 50%);
+}
+.thumbnailPopUpContainer .openFolderButton:hover {
+    transform: translate(-25%, 50%);
 }
 
 /* THE ALERT */
 .custom-alert {
     position: fixed;
-    top: 20px;
+    top: 1.25rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f44336; /* Cor de fundo vermelho */
+    background-color: #f44336;
     color: white;
     padding: 16px;
     border-radius: 8px;
@@ -424,12 +723,172 @@ button.dropdown-btn-resolution {
     background-color: white;
     color: #f44336;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     padding: 8px;
     cursor: pointer;
     font-weight: bold;
+    margin-left: 15px;
 }
 
 .custom-alert button:hover {
-    background-color: #fdd;
+    background-color: #ad2d24;
+    color: #FFFFFF;
+}
+.custom-alert button:focus {
+    outline: none;
+}
+
+/* THE CUSTOM MESSAGES and other stuff*/
+/* Custom popUp for the video and audio merged */
+.popUpContainer {
+    background: linear-gradient(-45deg, #8fbaff 0%, #1D4ED8 100% );
+    color: white;
+    /* position: fixed;
+    width: 250px;
+    height: 100px;
+    top: 45vh;
+    left: 50vw;
+    transform: translateX(-50%); */
+    display: grid;
+    padding: 16px;
+    justify-content: space-between;
+    border-radius: 15px;
+    z-index: 1000;
+    border: 2px solid #ffff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+.popUpTextContent{
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-bottom: 10px;
+    z-index: 1000;
+    user-select: none;
+}
+
+/* Screen Overlay*/
+.screenOverlay {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /*Semi transparent*/
+    z-index: 999; /* Ensure will be above anything */
+    pointer-events: auto; /*Removes the interaction*/
+}
+
+/* Open Folder Button */
+.openFolderButton {
+    background-color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 10px;
+    border: none;
+    color: #3B82F6;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    height: 38px;
+    width: 120px;
+    font-weight: 600; /* font-semibold */
+    user-select: none; /* Disable text selection */
+    align-items: center;
+    text-align: center;
+    margin-left: 25%;
+    display: inline-flex;
+    cursor: pointer;
+    
+}
+.openFolderButton .openTextContent {
+    margin-left:10px; /* Align correctly */
+}
+.openFolderButton .openPath-icon {
+    margin-left:10px; /* Align correctly */
+    width: 1.75rem;
+    height: 2.375rem;
+    stroke: #3B82F6;
+}
+.openFolderButton:hover {
+    transform: scale(1.1);
+    background-color: #4caf50;
+    color: #FFFFFF;
+}
+.openFolderButton:hover .openPath-icon {
+    stroke:#FFFFFF;
+}
+.openFolderButton:focus {
+    outline: none;
+}
+
+/* Close Button*/
+.stayButton {
+    height: 38px;
+    width: 120px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 10px;
+    border: none;
+    color: #f44336;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-weight: 600; /* font-semibold */
+    user-select: none; /* Disable text selection */
+    align-items: center;
+    text-align: center;
+    margin-left: 25%;
+    display: inline-flex;
+    cursor: pointer;
+}
+.stayButton .stayTextContent {
+    margin-left: 30px; /* Align correctly */
+    font-weight: 600; /* font-semibold */
+}
+.stayButton .cancel-icon {
+    margin-left:10px /* Align correctly */
+}
+.stayButton:hover {
+    background-color: #f44336;
+    color: #FFFFFF;
+    transform: scale(1.1);
+}
+.stayButton:hover .cancel-icon {
+    fill:#ffff;
+}
+.stayButton:focus {
+    outline: none;
+}
+
+/* Close and OpenFolder Usable*/
+.openFolderButton, .stayButton {
+    z-index: 1000; /* Makes usable*/
+    position: relative;
+    pointer-events: auto;
+}
+
+/* Loading Overlay */
+/* HTML: <div class="loader"></div> */
+.loadingBar {
+    height: 4px;
+    width: 130px;
+    /* top: 45vh;
+    left: 35vw;
+    transform: translateX(+50%);
+    position: fixed; */
+    --c: no-repeat linear-gradient(#3B82F6 0 0);
+    background: var(--c),var(--c),#ffffff;
+    background-size: 50% 100%;
+    animation: l16 3s infinite;
+    z-index: 1000;
+    pointer-events: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+@keyframes l16 {
+    0%   {background-position:-150% 0,-150% 0}
+    66%  {background-position: 250% 0,-150% 0}
+    100% {background-position: 250% 0, 250% 0}
 }

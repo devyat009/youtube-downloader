@@ -5,6 +5,7 @@ import threading
 import requests
 from yt_dlp import YoutubeDL
 from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QUrl, QObject, pyqtSlot, pyqtSignal
 from PyQt5.QtWebChannel import QWebChannel
@@ -23,7 +24,8 @@ class vid_downloader_backend(QObject):
     '''
     # Used to send the progress to the frontend.
     download_progress_signal = pyqtSignal(str, str, str, str)
-    errorSignal = pyqtSignal(str) # Used to send the backend errors to the frontend or other messages.
+    errorSignal = pyqtSignal(str) # Used to send the backend errors to the frontend.
+    messageSignal = pyqtSignal(str) # Used to send messages to be used in custom pop-ups.
     def __init__(self):
         super().__init__()
         self.ffmpeg_path = '.resources/ffmpeg/ffmpeg.exe'
@@ -38,6 +40,8 @@ class vid_downloader_backend(QObject):
         self.stop_download_event = threading.Event()
         self.download_thread = None
         self.process_url_thread = None
+        self.process_url_success = None
+        self.process_thumbnail_download_thread = None
         self.total_size = None # Used to save the filesize for transmitting the size for the front end on the '_download_vid_thread' def.
         
         # Verify if is being used on a executable file.
@@ -48,16 +52,21 @@ class vid_downloader_backend(QObject):
             self.ffmpeg_path = './app/resources/ffmpeg/ffmpeg.exe'
     
     @pyqtSlot(str)
-    def sendError(self, message):
-        self.errorSignal.emit(message)
+    def sendError(self, string):
+        self.errorSignal.emit(string)
+    @pyqtSlot(str)
+    def sendMessage(self, string):
+        self.messageSignal.emit(string)
+    
     
     # User paste the url and this function process and starts the thread.
     @pyqtSlot(str, result=str)
     def process_url(self, message):
         self.url_path = message # Saves the user pasted url.
-        self.process_url_thread = threading.Thread(target=self._process_url_thread())
+        self.process_url_thread = threading.Thread(target=self._process_url_thread)
         self.process_url_thread.start()
-        return ""
+        
+        return ''
     def _process_url_thread(self):
         self.video_id_list = self.get_video_formats(self.url_path)
     
@@ -69,6 +78,12 @@ class vid_downloader_backend(QObject):
         if folder:
             self.folder_path = folder
             return folder # Return the path for showing in the frontend.
+    
+    # Open the folder path
+    @pyqtSlot(result=bool)
+    def openFolder(self):
+        success = QDesktopServices.openUrl(QUrl.fromLocalFile(self.folder_path))
+        return success
     
     # Get the file option list. (WIP)
     @pyqtSlot(result=list)
@@ -100,13 +115,7 @@ class vid_downloader_backend(QObject):
                     if fmt.get('resolution') and fmt.get('filesize')
                 ]
                 sorted_video_id_list = sorted(filtered_id_list, key=resolution_key)
-                self.auto_audio_select_id = self.get_audio_format_id() # used just to call the self.auto_audio_select_size
-                for audio_size in self.video_id_list: # Auto increment the audio size to the video size depending on quality(WIP)
-                    if self.auto_audio_select_id == audio_size['format_id']:
-                        self.auto_audio_select_size == audio_size['filesize']
-                    else:
-                        self.auto_audio_select_size = 0
-                resolution_options = [f'{fmt['resolution']} - {self.format_size(fmt['filesize'] + self.auto_audio_select_size)}' for fmt in sorted_video_id_list]
+                resolution_options = [f'{fmt['resolution']} - ~{self.format_size(fmt['filesize'])}' for fmt in sorted_video_id_list]
                 return resolution_options
             else:
                 return []
@@ -186,6 +195,7 @@ class vid_downloader_backend(QObject):
                                 # Resolution Rename
                                 resolution = fmt.get('resolution')
                                 resolution_map = {
+                                    # Horizontal Videos
                                     '7680x4320': '4320p',
                                     '3840x2160': '2160p',
                                     '2560x1440': '1440p',
@@ -195,8 +205,36 @@ class vid_downloader_backend(QObject):
                                     '640x360': '360p',
                                     '426x240': '240p',
                                     '256x144': '144p',
+                                    # Vertical Videos
+                                    '4320x7680': '4320p',
+                                    '2160x3840': '2160p',
+                                    '1440x2560': '1440p',
+                                    '1080x1920': '1080p',
+                                    '720x1280': '720p',
+                                    '480x854': '480p',
+                                    '360x640': '360p',
+                                    '240x426': '240p',
+                                    '144x256': '144p',
+                                    # Aspect Ratio 1.4
+                                    '3024x2160': '2160p',
+                                    '2016x1440': '1440p',
+                                    '1512x1080': '1080p',
+                                    '1008x720': '720p',
+                                    '672x480': '480p',
+                                    '504x360': '360p',
+                                    '336x240': '240p',
+                                    '202x144': '144p',
+                                    # Aspect Ratio 21:9
+                                    '3840x1644': '2160p',
+                                    '2560x1096': '1440p',
+                                    '1920x822': '1080p',
+                                    '1280x548': '720p',
+                                    '854x366': '480p',
+                                    '640x274': '360p',
+                                    '426x182': '240p',
+                                    '256x110': '144p',
                                 }
-                                resolution = resolution_map.get(resolution, resolution)
+                                resolution = resolution_map.get(fmt.get('resolution'), f"Unknown {fmt.get('resolution')}")
                                 
                                 # Audio Filter
                                 audio_quality = fmt.get('abr')
@@ -222,7 +260,7 @@ class vid_downloader_backend(QObject):
                                         self.sendError('Cant append any audio to the video_audio_list')
                                 
                                 # Format Filter
-                                if fmt['ext'] in ['mp4', 'mp3', 'mkv', 'm4a']:
+                                elif fmt['ext'] in ['mp4', 'mp3', 'mkv', 'm4a']:
                                     # Next Stage: filter for format_note
                                     if 'format_note' in fmt and fmt['format_note']:
                                         if fmt['format_note'] in ['144p', '240p', '360p', '480p', '720p', '720p60', '720p50', '1080p', '1080p60', '1080p50', '1440p', '1440p60', '1440p50', '2160p', '2160p60', '2160p50']:
@@ -266,18 +304,18 @@ class vid_downloader_backend(QObject):
                                                                                 })
                                             # Out of scope:
                                             else:
-                                                print('Something out of the scope was found, find out what is it with the out_of_scope_list.')
+                                                print('Something out of the scope was found, find out what is it with the out_of_scope_list for lower resolutions.')
                                                 out_of_scope_list.append({'format_id':fmt['format_id'],
                                                                             'filetype':fmt['ext'],
                                                                             'resolution':resolution,
                                                                             'filesize':filesize,
                                                                             'codec':codec_short,
                                                                             'acodec': fmt['acodec'],
-                                                                            'fps': fps
+                                                                            'fps': fps,
+                                                                            'error': 'error'
                                                                             })
-                                                #continue
                                     # Next Stage: filter for resolution, used for resolutions equal 1080p or higher due use of vp09 codec.
-                                    elif 'resolution' in fmt and fmt['resolution'] in ['2560x1440', '3840x2160', '7680x4320']:
+                                    elif 'resolution' in fmt and fmt['resolution'] in resolution_map.keys():
                                         #if fmt['protocol'] == 'https': # add a proper filter for hdr videos
                                         #    continue
                                         #FPS Filter
@@ -300,7 +338,7 @@ class vid_downloader_backend(QObject):
                                                                 })
                                         # Out of scope:
                                         else:
-                                            print('Something out of the scope was found, find out what is it with the out_of_scope_list.')
+                                            #print('Something out of the scope was found, find out what is it with the out_of_scope_list for higher resolutions.')
                                             out_of_scope_list.append({'format_id':fmt['format_id'],
                                                                             'filetype':fmt['ext'],
                                                                             'resolution':fmt['resolution'],
@@ -323,6 +361,7 @@ class vid_downloader_backend(QObject):
                             #     json.dump(formats_information, new_file, indent=4)
                             #     print('file created')
                             # shutil.move(json_video, json_output)
+                            self.sendMessage('get_video_formats finished') # send to the frontend this to notify it conclusion to continue JavaScript function get_url 
                             return video_id_list
                         else:
                             self.sendError('No available formats')
@@ -338,10 +377,14 @@ class vid_downloader_backend(QObject):
         except requests.exceptions.Timeout:
             #print('PLACEHOLDER - Connection was timed out')
             self.sendError('Connection was timed out, try again later')
-        # Else
         except requests.exceptions.RequestException as error:
-            #print(f'PLACEHOLDER - Some error occurred: {error}')
-            self.sendError(f'Some error occurred on request: {error}')
+            # Request without https://
+            if 'No scheme supplied. Perhaps you meant https://?' in str(error):
+                self.sendError('Please use a valid URL with https://')
+            elif f"Invalid URL '{url}': No scheme supplied. Perhaps you meant https://{url}?" in str(error):
+                self.sendError('Please insert https:// on the URL provided.')
+            else:
+                self.sendError(f'Some error occurred on request: {error}')
     
     def get_audio_format_id(self):
         '''
@@ -394,9 +437,43 @@ class vid_downloader_backend(QObject):
     # Get the video thumbnail
     @pyqtSlot(result=str)
     def get_thumbnail(self):
-        image = f'{self.thumbnail_url}'
-        return image
-
+        if self.thumbnail_url is not None:
+            image = f'{self.thumbnail_url}'
+            return image
+        else:
+            return 'Image Not Found'
+    
+    @pyqtSlot(result=str)
+    def download_thumbnail(self):
+        self.process_thumbnail_download_thread = threading.Thread(target=self._process_download_thumbnail_thread)
+        self.process_thumbnail_download_thread.start()
+        
+    def _process_download_thumbnail_thread(self):
+        if self.thumbnail_url is not None and self.folder_path is not None:
+            self.sendMessage('downloading')
+            ydl_opts =  {
+                'skip_download': True,
+                'writethumbnail': True,
+            }
+            def clean_title(title):
+                return re.sub(r'[<>:"/\\|?*]', '', title)
+            
+            with YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(self.url_path, download=False)
+                title = info.get('title')
+                
+                if self.thumbnail_url and title:
+                    filename = clean_title(title) + '.jpg'
+                    response = requests.get(self.thumbnail_url)
+                    file_path = os.path.join(self.folder_path, filename)
+                    if response.status_code == 200:
+                        with open(file_path, "wb") as f:
+                            f.write(response.content)
+                            self.sendMessage("thumbnail downloaded")
+                    else:
+                        self.sendError('Failed to download thumbnail.')
+        
+        
     # DOWNLOAD BUTTON WIP
     @pyqtSlot(result=str)
     def download_vid(self):
@@ -452,7 +529,7 @@ class vid_downloader_backend(QObject):
                         self.sendError(f'Error trying download the {d['filename']}')
                 ydl.add_progress_hook(download_hook)
                 ydl.download([self.url_path])
-                self.sendError('Video and audio files merged sucessfully')
+                self.sendMessage('Vid and Aud merged') # Need be the same on the front end due used to customize an pop-up 
         except Exception as e:
             if str(e) == 'Download canceled by user.':
                 pass # ignore this specific caught
